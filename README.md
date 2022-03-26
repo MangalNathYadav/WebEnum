@@ -12,7 +12,18 @@ You do not need to write commands here, using this script you just have to pass 
 
 <h2>Tutorial</h2>
 <blockquote>
-<p dir="auto"> No need any tutorial very easy.. 
+<p dir="auto"> <div class="highlight"><pre class="highlight"><code> git clone https://github.com/MangalNathYadav/WebEnum.git 
+
+</code></pre></div>
+  
+  <div class="highlight"><pre class="highlight"><code> cd WebEnum
+
+</code></pre></div>
+  <div class="highlight"><pre class="highlight"><code> chmod +x *
+</code></pre></div>
+
+  <div class="highlight"><pre class="highlight"><code> ./install.sh
+</code></pre></div>
   </blackquote>
 <h3>Developer : MG Hacker </h3>
 

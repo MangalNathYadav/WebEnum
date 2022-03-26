@@ -1,8 +1,18 @@
 #!/bin/bash
 
+echo "#     #                 #######"
+echo "#  #  #  ######  #####  #        #    #  #    #  #    #"
+echo "#  #  #  #       #    # #        ##   #  #    #  ##  ##"
+echo "#  #  #  #####   #####  #####    # #  #  #    #  # ## #"
+echo "#  #  #  #       #    # #        #  # #  #    #  #    #"
+echo "#  #  #  #       #    # #        #   ##  #    #  #    #"
+echo " ## ##   ######  #####  #######  #    #   ####   #    #"
+printf "\e[1;77m\e[45m  WebEnum Version 1.0 Author: Mg Hacker   \e[0m\n"
+printf "\n"
+
 echo "Enter Target IP >>"
-read ip
-echo "Enter output File location for nmap scan >>"
+read ip_addr
+echo "Enter output File location for nmap scan >> "
 read output
 echo "Runnning Nmap.."
 nmap -T4 -A -vv -oA $output -sV -O  $ip | lolcat
@@ -10,7 +20,7 @@ echo "running nmap --script vuln scan"
 nmap --script vuln -oA $output $ip
 
 
-echo "Enter IP or website url without http:// or https:// >>"
+echo "Enter IP or website url without http:// or https:// >> "
 read ip
 echo "What kind of website you are enumerating for directory 'http' or 'https' type >> "
 read service

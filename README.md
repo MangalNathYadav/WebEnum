@@ -1,5 +1,6 @@
 # WebEnum
 Website enumeration script for getting details of nmap and gobuster scans
+<img src = "https://github.com/MangalNathYadav/WebEnum/blob/main/image_2022-03-26_090611.png" alt=WebEnum > </img>
 <blockquote>
 <p dir="auto">The script wil do NMAP scan  <br>
 The script wil do gobuster scan</p>

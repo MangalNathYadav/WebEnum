@@ -11,7 +11,7 @@ printf "\e[1;77m\e[45m  WebEnum Version 1.0 Author: Mg Hacker   \e[0m\n"
 printf "\n"
 
 echo "Enter Target IP >>"
-read ip_addr
+read ip
 echo "Enter output File location for nmap scan >> "
 read output
 echo "Runnning Nmap.."

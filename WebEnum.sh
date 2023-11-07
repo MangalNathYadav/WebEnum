@@ -1,49 +1,61 @@
 #!/bin/bash
 
-echo "#     #                 #######"
-echo "#  #  #  ######  #####  #        #    #  #    #  #    #"
-echo "#  #  #  #       #    # #        ##   #  #    #  ##  ##"
-echo "#  #  #  #####   #####  #####    # #  #  #    #  # ## #"
-echo "#  #  #  #       #    # #        #  # #  #    #  #    #"
-echo "#  #  #  #       #    # #        #   ##  #    #  #    #"
-echo " ## ##   ######  #####  #######  #    #   ####   #    #"
-printf "\e[1;77m\e[45m  WebEnum Version 1.0 Author: Mg Hacker   \e[0m\n"
+# Banner and author information
+echo "  WebEnum Version 2.0"
+echo "  Author: Mg Hacker"
+printf "\e[1;77m\e[45m  Web Enumeration Tool   \e[0m\n"
 printf "\n"
 
-echo "Enter Target IP >>"
-read ip
-echo "Enter output File location for nmap scan >> "
-read output
-echo "Runnning Nmap.."
-nmap -T4 -A -vv -oA $output -sV -O  $ip | lolcat
-echo "running nmap --script vuln scan"
-nmap --script vuln -oA $output $ip
+# Function to display the main menu
+show_menu() {
+    echo "Main Menu:"
+    echo "1. Nmap Scan"
+    echo "2. Gobuster Directory Enumeration"
+    echo "3. Exit"
+    read -p "Enter your choice (1/2/3): " choice
+}
 
+while true; do
+    show_menu
 
-echo "Enter IP or website url without http:// or https:// >> "
-read ip
-echo "What kind of website you are enumerating for directory 'http' or 'https' type >> "
-read service
-echo "Running Dirbuster.."
-echo "Using dafault wordlist.."
-echo "if you want to use another wordlist select option : '1' for entering new wordlist or '2' for continue >>"
-read condition
-if  [[  $condition == 1  ]]
-then 
-	echo "Enter directory for wordlist"
-	read dir
-	gobuster dir -t 10 -w $dir -v -u $ip
-elif  [[  $condition == 2  ]]
-then
-	gobuster dir -t 10 -w /usr/share/dirb/wordlists/common.txt -u $service://$ip
-else
-	echo " !! Unexpected error !! " 
-fi
-#MG Hacker's Tool for enumerating website 
-#doing nmap and dir scans
+    case $choice in
+        1) # Nmap Scan
+            read -p "Enter Target IP or Hostname: " nmap_ip
+            read -p "Enter the output file location for Nmap scan (or press Enter for default): " nmap_output
 
+            if [ -z "$nmap_output" ]; then
+                nmap_output="nmap_scan"
+            fi
 
+            echo "Running Nmap scan..."
+            nmap -T4 -A -vv -oA "$nmap_output" -sV -O "$nmap_ip" | lolcat
+            echo "Running Nmap Vuln Scan..."
+            nmap --script vuln -oA "$nmap_output" "$nmap_ip"
+            ;;
 
+        2) # Gobuster Directory Enumeration
+            read -p "Enter IP or website URL without 'http://' or 'https://': " gobuster_ip
+            read -p "What kind of website are you enumerating for (http or https)? " service
 
+            # Define default wordlist and prompt for custom wordlist
+            default_wordlist="/usr/share/dirb/wordlists/common.txt"
+            read -p "Do you want to use a custom wordlist? (Y/n) " use_custom_wordlist
 
+            if [ "$use_custom_wordlist" = "Y" ] || [ "$use_custom_wordlist" = "y" ]; then
+                read -p "Enter the directory for the custom wordlist: " custom_wordlist
+                gobuster dir -t 10 -w "$custom_wordlist" -u "$service://$gobuster_ip"
+            else
+                echo "Using the default wordlist..."
+                gobuster dir -t 10 -w "$default_wordlist" -u "$service://$gobuster_ip"
+            ;;
+        
+        3) # Exit
+            echo "Exiting the Web Enumeration Tool. Goodbye!"
+            exit
+            ;;
 
+        *) # Invalid choice
+            echo "Invalid choice. Please select a valid option (1/2/3)."
+            ;;
+    esac
+done

@@ -28,7 +28,7 @@ You do not need to write commands here, using this script you just have to pass 
   <div class="highlight"><pre class="highlight"><code> ./install.sh
 </code></pre></div>
   </blackquote>
-<h3>Developer : MG Hacker </h3>
+<h3>Developer :shadowXg</h3>
 
 
 <h2> Error Solving </h2>
